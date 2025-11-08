@@ -1,3 +1,4 @@
+'use client';
 import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
 import {
