@@ -21,6 +21,11 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
+      name: 'credentials',
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
       async authorize(credentials) {
         const parsedCredentials = z
           .object({ 
@@ -38,8 +43,11 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
           if (passwordsMatch) return user;
         }
 
+        console.log('Invalid credentials');
         return null;
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  trustHost: true,
 });
